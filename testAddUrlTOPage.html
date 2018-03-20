@@ -45,6 +45,30 @@ f=false,d=document;return{use_existing_jquery:function(){return use_existing_jqu
     
     
  
+         <script>
+           // this should be the Ajax Method.
+// and load the url content
+var setCurrentPage = function(url) {
+    $('h2 span').html(url || "/");
+    $("#actionlink a[href='" + url + "']").fadeTo(500, 0.3);
+};
+
+$('#actionlink a').click(function(e){
+    e.preventDefault();
+    var targetUrl = $(this).attr('href'),
+        targetTitle = $(this).attr('title');
+    
+    $("#actionlink a[href='" + window.location.pathname + "']").fadeTo(500, 1.0);
+    
+    window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
+    setCurrentPage(targetUrl);
+});
+
+window.onpopstate = function(e) {
+    $("#actionlink a").fadeTo('fast', 1.0);
+    setCurrentPage(e.state ? e.state.url : null);
+};
+			</script>
 
     
     
@@ -96,7 +120,7 @@ f=false,d=document;return{use_existing_jquery:function(){return use_existing_jqu
     <ul id="menu-nav">
           
             <h2 class="f6 f4-l pb0 lh-title">
-            <button role="button" type="button" id="dropDown" class="white-60 hover-white-90 pointer-hover" aria-expanded="false" id="actionlink"><a href="file:///C:/Users/Kevin/Desktop/CODE/testAddUrlTOPage.html/page-2/" title="Pagina 2">
+            <button role="button" type="button" id="dropDown" class="white-60 hover-white-90 pointer-hover" aria-expanded="false" id="actionlink"><a href="/page-2/" title="Pagina 2">
               Not on Twitter? No worries, email them instead!
               <svg aria-hidden="true" focusable="false" viewBox="0 0 10 10">
                 <rect class="vert" height="8" width="2" y="1" x="4"/>
@@ -112,31 +136,7 @@ f=false,d=document;return{use_existing_jquery:function(){return use_existing_jqu
             <p><iframe frameborder="0" scrolling="no" src="https://join.amnesty.org/ea-action/action?ea.client.id=1924&amp;ea.campaign.id=101468" id="iFrameResizer0" style="width:100%; height:1050px;"></iframe></p>
           </div>
             
-            <script>
-           // this should be the Ajax Method.
-// and load the url content
-var setCurrentPage = function(url) {
-    $('h2 span').html(url || "/");
-    $("#actionlink a[href='" + url + "']").fadeTo(500, 0.3);
-};
-
-$('#actionlink a').click(function(e){
-    e.preventDefault();
-    var targetUrl = $(this).attr('href'),
-        targetTitle = $(this).attr('title');
-    
-    $("#actionlink a[href='" + window.location.pathname + "']").fadeTo(500, 1.0);
-    
-    window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
-    setCurrentPage(targetUrl);
-});
-
-window.onpopstate = function(e) {
-    $("#actionlink a").fadeTo('fast', 1.0);
-    setCurrentPage(e.state ? e.state.url : null);
-};
-			</script>
-
+   
            
         
 
