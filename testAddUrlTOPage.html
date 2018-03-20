@@ -45,32 +45,6 @@ f=false,d=document;return{use_existing_jquery:function(){return use_existing_jqu
     
     
  
-         <script>
-           // this should be the Ajax Method.
-// and load the url content
-var setCurrentPage = function(url) {
-    $('h2 span').html(url || "/");
-    $("#actionlink a[href='" + url + "']").fadeTo(500, 0.3);
-};
-
-$('#actionlink a').click(function(e){
-    e.preventDefault();
-    var targetUrl = $(this).attr('href'),
-        targetTitle = $(this).attr('title');
-    
-    $("#actionlink a[href='" + window.location.pathname + "']").fadeTo(500, 1.0);
-    
-    window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
-    setCurrentPage(targetUrl);
-});
-
-window.onpopstate = function(e) {
-    $("#actionlink a").fadeTo('fast', 1.0);
-    setCurrentPage(e.state ? e.state.url : null);
-};
-			</script>
-
-    
     
   </head>
   <body class="helvetica">
@@ -118,7 +92,7 @@ window.onpopstate = function(e) {
 
          
     <ul id="menu-nav">
-          
+          <h2>Current Page: <span>/</span></h2>
             <h2 class="f6 f4-l pb0 lh-title">
             <button role="button" type="button" id="dropDown" class="white-60 hover-white-90 pointer-hover" aria-expanded="false" id="actionlink"><a href="/page-2/" title="Pagina 2">
               Not on Twitter? No worries, email them instead!
@@ -130,6 +104,34 @@ window.onpopstate = function(e) {
             </button>
           </h2>
         </div>
+          
+          
+         <script>
+           // this should be the Ajax Method.
+// and load the url content
+var setCurrentPage = function(url) {
+    $('h2 span').html(url || "/");
+    $("#actionlink a[href='" + url + "']").fadeTo(500, 0.3);
+};
+
+$('#actionlink a').click(function(e){
+    e.preventDefault();
+    var targetUrl = $(this).attr('href'),
+        targetTitle = $(this).attr('title');
+    
+    $("#actionlink a[href='" + window.location.pathname + "']").fadeTo(500, 1.0);
+    
+    window.history.pushState({url: "" + targetUrl + ""}, targetTitle, targetUrl);
+    setCurrentPage(targetUrl);
+});
+
+window.onpopstate = function(e) {
+    $("#actionlink a").fadeTo('fast', 1.0);
+    setCurrentPage(e.state ? e.state.url : null);
+};
+			</script>
+
+    
 
           <div hidden id="dropDownTarget">
             <p style="text-align:center;">Send an email to the CEO of Twitter and make a stand with Amnesty International</p>
